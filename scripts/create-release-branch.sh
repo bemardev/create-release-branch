@@ -365,7 +365,8 @@ git branch --show-current
 
 echo "jq : main"
 #current_version="${enforce_version:-$(jq -r '.version // empty' "$version_file")}"
-current_version=$(jq -r '.version // empty' "$version_file")
+#current_version=$(jq -r '.version // empty' "$version_file")
+current_version="1.0.0"
 #.version as $line | try (fromjson) catch $line
 
 if [[ -z "$current_version" ]]; then
