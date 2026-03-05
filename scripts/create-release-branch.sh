@@ -241,7 +241,7 @@ get_direct_commits() {
 
     # Get commits with a simple format that we can parse
     local commits
-    commits=$(eval "git log $source_branch --no-merges $date_range --format='%H'")
+    commits=$(eval "git log origin/$source_branch --no-merges $date_range --format='%H'")
 
     # Process each commit with proper comma handling
     first=true
