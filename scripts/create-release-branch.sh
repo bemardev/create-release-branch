@@ -364,7 +364,9 @@ echo "show current"
 git branch --show-current
 
 echo "jq : main"
-current_version="${enforce_version:-$(jq -r '.version // empty' "$version_file")}"
+#current_version="${enforce_version:-$(jq -r '.version // empty' "$version_file")}"
+current_version=$(jq -r '.version // empty' "$version_file")
+#.version as $line | try (fromjson) catch $line
 
 if [[ -z "$current_version" ]]; then
   echo "Error: version not provided (no --enforce-version and no version in $version_file)" >&2
