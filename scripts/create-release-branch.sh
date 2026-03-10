@@ -340,6 +340,8 @@ semantic_versioning() {
   echo "$new_version"
 }
 
+echo "jq version: $(jq --version)"
+
 if [ -n "$include_pr_ids" ]; then
   pr_data=$(get_prs_by_ids)
 else
