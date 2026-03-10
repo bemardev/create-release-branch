@@ -420,7 +420,8 @@ debug_commits "$source_branch" "$target_branch" "$release_branch"
 echo "jq : main 2"
 echo "$pr_data"
 #json=$(echo "$pr_data" | jq reverse)
-json=$(echo "$pr_data")
+jq reverse <<<"pr_data" > "$json"
+
 echo "jq : main 2 OK"
 
 echo "Reverse PR DATA: $CYAN$json$RESET"
@@ -430,7 +431,7 @@ echo "Filtering PRs and extracting commit hashes..."
 
 tmp_items="$(mktemp)"
 echo "jq : main 3"
-jq -c reverse '.[]' <<<"$json" > "$tmp_items"
+jq -c '.[]' <<<"$json" > "$tmp_items"
 echo "jq : main 3 OK"
 
 while IFS= read -r item; do
