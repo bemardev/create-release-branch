@@ -419,7 +419,8 @@ debug_commits "$source_branch" "$target_branch" "$release_branch"
 
 echo "jq : main 2"
 echo "$pr_data"
-json=$(echo "$pr_data" | jq reverse)
+#json=$(echo "$pr_data" | jq reverse)
+json=$(echo "$pr_data")
 echo "jq : main 2 OK"
 
 echo "Reverse PR DATA: $CYAN$json$RESET"
