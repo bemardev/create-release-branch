@@ -413,6 +413,7 @@ CREATED_RELEASE_BRANCH=true
 debug_commits "$source_branch" "$target_branch" "$release_branch"
 
 echo "jq : main 2"
+echo "$pr_data"
 json=$(echo "$pr_data" | jq 'reverse')
 
 echo "Reverse PR DATA: $CYAN$json$RESET"
