@@ -198,7 +198,8 @@ get_prs_by_ids() {
 
       echo "jq : get_prs_by_ids"
       merge_commit=$(eval "$pr_cmd" | jq -r '.[0].mergeCommit.oid')
-
+      echo "jq : get_prs_by_ids OK"
+      
       log_verbose "oid: $merge_commit"
 
      if [ -z "$merge_commit" ]; then
@@ -297,12 +298,13 @@ semantic_versioning() {
   items_file=$(mktemp)
   echo "jq : semantic_versioning"
   jq -c '.[]' "$temp_file" > "$items_file"
+  echo "jq : semantic_versioning OK"
 
   # Process each commit
   while IFS= read -r item; do
     echo "jq : semantic_versioning 2"
     messageBody=$(echo "$item" | jq -r '.messageBody')
-
+    echo "jq : semantic_versioning 2 OK"
     if $verbose_detail; then
       log_verbose "Checking commit: $messageBody"
     fi
@@ -366,6 +368,7 @@ git branch --show-current
 echo "jq : main"
 #current_version="${enforce_version:-$(jq -r '.version // empty' "$version_file")}"
 #current_version=$(jq -r '.version // empty' "$version_file")
+echo "jq : main OK"
 current_version="1.0.0"
 #.version as $line | try (fromjson) catch $line
 
@@ -415,6 +418,7 @@ debug_commits "$source_branch" "$target_branch" "$release_branch"
 echo "jq : main 2"
 echo "$pr_data"
 json=$(echo "$pr_data" | jq 'reverse')
+echo "jq : main 2 OK"
 
 echo "Reverse PR DATA: $CYAN$json$RESET"
 
@@ -424,12 +428,15 @@ echo "Filtering PRs and extracting commit hashes..."
 tmp_items="$(mktemp)"
 echo "jq : main 3"
 jq -c '.[]' <<<"$json" > "$tmp_items"
+echo "jq : main 3 OK"
 
 while IFS= read -r item; do
   echo "jq : main 4"
   oid=$(jq -r '.oid' <<<"$item")
+  echo "jq : main 4 OK"
   echo "jq : main 5"
   messageHeadline=$(jq -r '.messageHeadline' <<<"$item")
+  echo "jq : main 5 OK"
   fetch_and_cherrypick "$oid" "$messageHeadline"
 done < "$tmp_items"
 
