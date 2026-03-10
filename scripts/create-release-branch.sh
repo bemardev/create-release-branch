@@ -430,15 +430,15 @@ echo "Filtering PRs and extracting commit hashes..."
 
 tmp_items="$(mktemp)"
 echo "jq : main 3"
-jq -c reverse .[] <<<"$json" > "$tmp_items"
+jq -c reverse '.[]' <<<"$json" > "$tmp_items"
 echo "jq : main 3 OK"
 
 while IFS= read -r item; do
   echo "jq : main 4"
-  oid=$(jq -r .oid <<<"$item")
+  oid=$(jq -r '.oid' <<<"$item")
   echo "jq : main 4 OK"
   echo "jq : main 5"
-  messageHeadline=$(jq -r .messageHeadline <<<"$item")
+  messageHeadline=$(jq -r '.messageHeadline' <<<"$item")
   echo "jq : main 5 OK"
   fetch_and_cherrypick "$oid" "$messageHeadline"
 done < "$tmp_items"
