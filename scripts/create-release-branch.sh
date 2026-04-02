@@ -274,11 +274,11 @@ get_direct_commits() {
       else
         printf ","
       fi
-      echo "{\"oid\":\"$oid\",\"messageHeadline\":\"$headline\",\"messageBody\":\"$body\"}" | tr '\n' ' '
+      echo "{\"oid\":\"$oid\",\"messageHeadline\":\"$headline\",\"messageBody\":\"$body\"}" | tr '\n' ''
     done
 
     # Close the JSON array
-    printf "]\n"
+    printf "]"
 }
 
 semantic_versioning() {
