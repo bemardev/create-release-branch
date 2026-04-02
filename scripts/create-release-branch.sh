@@ -274,7 +274,7 @@ get_direct_commits() {
       else
         printf ","
       fi
-      echo "{\"oid\":\"$oid\",\"messageHeadline\":\"$headline\",\"messageBody\":\"$body\"}" | tr -d '\n'
+      echo "{'oid':'$oid','messageHeadline':'$headline','messageBody':'$body'}" | tr -d '\n'
     done
 
     # Close the JSON array
@@ -419,7 +419,7 @@ debug_commits "$source_branch" "$target_branch" "$release_branch"
 
 echo "jq : main 2"
 echo "$pr_data"
-json=$(echo '$pr_data' | jq reverse)
+json=$(echo "$pr_data" | jq 'reverse')
 echo "jq : main 2 OK"
 
 echo "Reverse PR DATA: $CYAN$json$RESET"
