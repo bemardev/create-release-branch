@@ -274,7 +274,7 @@ get_direct_commits() {
       else
         printf ","
       fi
-      echo "{'oid':'$oid','messageHeadline':'$headline','messageBody':'$body'}" | tr -d '\n'
+      echo "{\"oid\":\"$oid\",\"messageHeadline\":\"$headline\",\"messageBody\":\"$body\"}" | tr -d '\n'
     done
 
     # Close the JSON array
