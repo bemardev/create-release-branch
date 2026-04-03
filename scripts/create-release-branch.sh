@@ -94,12 +94,15 @@ log_verbose() {
 #   fetch_and_cherrypick "$commit_hash" "$pr_number"
 
 fetch_and_cherrypick() {
+  echo "IN fetch_and_cherrypick"
   set -euo pipefail
 
     local commit_hash="$1"
     local pr_title="$2"
     local pr_number
     pr_number=$(echo "$pr_title" | grep -oE '\(#[0-9]+\)' | grep -oE '[0-9]+')
+
+    echo "PR_NUMBER: $pr_number"
 
   # Make sure we’re in a clean repo
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "Not a git repo."; exit 1; }
@@ -445,7 +448,11 @@ while IFS= read -r item; do
   fetch_and_cherrypick "$oid" "$messageHeadline"
 done < "$tmp_items"
 
+echo "L 448 OK"
+
 rm -f "$tmp_items"
+
+echo "L 452 OK"
 
 if [[ "${no_push:-}" != true ]]; then
   # Push the release branch
