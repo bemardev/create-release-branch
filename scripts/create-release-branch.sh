@@ -349,7 +349,9 @@ else
   pr_data=$(get_direct_commits)
 fi
 
-echo "PR DATA: $CYAN$pr_data$RESET"
+echo "PR DATA: $pr_data"
+echo "$pr_data" | jq -sRr '{input: ., json: (try fromjson catch .)}'
+exit 1
 
 # Check if pr_data is empty or just "[]"
 if [ -z "$pr_data" ] || [ "$pr_data" = "[]" ]; then
@@ -423,6 +425,7 @@ echo "$pr_data"
 echo "$pr_data" | jq -sRr '{input: ., json: (try fromjson catch .)}'
 json=$(echo "$pr_data" | tr -d '\n' | jq 'reverse')
 echo "JSON: $json"
+
 #jq -n -argjson "$pr_data" 'reverse' >>> $json
 #json=$(echo jq --argjson "$pr_data" 'reverse')
 echo "jq : main 2 OK"
