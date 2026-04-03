@@ -224,7 +224,6 @@ get_prs_by_ids() {
 }
 
 get_direct_commits() {
-  echo "get_direct_commits"
   local date_range=""
 
   IFS=',' read -ra exclude_filter <<< "$exclude_patterns"
