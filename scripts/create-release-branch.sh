@@ -420,6 +420,7 @@ debug_commits "$source_branch" "$target_branch" "$release_branch"
 
 echo "jq : main 2"
 echo "$pr_data"
+echo "$pr_data" | jq -sRr '{input: ., json: (try fromjson catch .)}'
 json=$(echo "$pr_data" | tr -d '\n' | jq 'reverse')
 echo "JSON: $json"
 #jq -n -argjson "$pr_data" 'reverse' >>> $json
