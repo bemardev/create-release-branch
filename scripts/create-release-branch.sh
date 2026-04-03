@@ -103,6 +103,7 @@ fetch_and_cherrypick() {
     local commit_hash="$1"
     local pr_title="$2"
     local pr_number
+    pr_number=""
     #echo "$pr_title" | grep -oE '\(#[0-9]+\)' | grep -oE '[0-9]+'
     #pr_number=$(echo "$pr_title" | grep -oE '\(#[0-9]+\)' | grep -oE '[0-9]+')
 
