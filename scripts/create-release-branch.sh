@@ -95,6 +95,8 @@ log_verbose() {
 
 fetch_and_cherrypick() {
   echo "IN fetch_and_cherrypick"
+  echo "PARAM 1: $1"
+  echo "PARAM 2: $2"
   set -euo pipefail
 
     local commit_hash="$1"
