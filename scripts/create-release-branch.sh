@@ -6,6 +6,7 @@ PREV_BRANCH="$(git branch --show-current 2>/dev/null || true)"
 CREATED_RELEASE_BRANCH=false
 
 rollback() {
+  echo "Error on line $1"
   echo "Error encountered, rolling back..." >&2
   git cherry-pick --abort 2>/dev/null || true
 
@@ -25,7 +26,7 @@ rollback() {
   exit 1
 }
 
-trap rollback ERR
+trap 'rollback $LINENO' ERR
 
 # Default values
 source_branch="dev"
