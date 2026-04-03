@@ -349,8 +349,6 @@ else
 fi
 
 echo "PR DATA: $pr_data"
-echo "$pr_data" | jq -sRr '{input: ., json: (try fromjson catch .)}'
-exit 1
 
 # Check if pr_data is empty or just "[]"
 if [ -z "$pr_data" ] || [ "$pr_data" = "[]" ]; then
@@ -420,8 +418,6 @@ CREATED_RELEASE_BRANCH=true
 debug_commits "$source_branch" "$target_branch" "$release_branch"
 
 echo "jq : main 2"
-echo "$pr_data"
-echo "$pr_data" | jq -sRr '{input: ., json: (try fromjson catch .)}'
 json=$(echo "$pr_data" | tr -d '\n' | jq 'reverse')
 echo "JSON: $json"
 
